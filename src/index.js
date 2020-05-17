@@ -2,33 +2,33 @@
     {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
-        city: 'bney brak',
+        city: 'Bney Brak',
         location: 'school',
         patientId: '111'
     }, {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
-        city: 'jerusalem',
+        city: 'Jerusalem',
         location: 'library',
         patientId: '111'
     }, {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
-        city: 'elad',
+        city: 'Elad',
         location: 'park',
         patientId: '111'
     },
     {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
-        city: 'jerusalem',
+        city: 'Jerusalem',
         location: 'school',
         patientId: '222'
     },
     {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
-        city: 'tel aviv',
+        city: 'Tel Aviv',
         location: 'school',
         patientId: '333'
     }
@@ -137,8 +137,6 @@ function cleanAddingOption() {
     document.getElementById('city').value = "";
     document.getElementById('location').value = "";
 }
-
-//-------Batya Code---------
 initList(locations);
 document.getElementById('cityInput').addEventListener("change", filterCity);
 document.getElementById('select').addEventListener("change", filterCity);
