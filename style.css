@@ -1,0 +1,91 @@
+body {
+    margin-left: 10vw;
+    margin-top: 5vh;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 7vh;
+    margin-bottom: 3vh;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    width: 10vw;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+table tr td:last-child {
+    width: 3vw;
+}
+
+.title {
+    background-color: #5099eff2;
+    font-size: large;
+    color: white;
+    text-transform: capitalize;
+}
+
+#patientID {
+    color: #5099eff2;
+    border-color: lightslategray;
+    border-width: thin;
+}
+
+input {
+    width: 16vw;
+    border-color: #5099eff2;
+    border-style: solid;
+    border-width: thin;
+    margin-right: 0.3vw;
+    height: 3.5vh;
+}
+
+#addPath {
+    width: 6vw;
+    background-color: #5099eff2;
+    color: white;
+}
+
+#search {
+    width: 5vh;
+    margin-bottom: -2vh;
+}
+
+h1 {
+    color: #5099eff2;
+}
+
+/* Batya Code */
+
+/* h1 { 
+    background-color: red;
+    font-weight: inherit;
+    margin-left: inherit;
+    font-family: monospace;
+    width: 250px;
+    } */
+
+/* li {
+    background-color:mediumaquamarine;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: unset;
+    border: green;
+    border-left: inherit; 
+}
+ul{
+    position: relative;
+    max-width: 500px;
+} */
+
+/* div {
+    width: 250px;
+    height: 100px;
+} */
