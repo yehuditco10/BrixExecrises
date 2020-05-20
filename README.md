@@ -1,2 +1,2 @@
 # BrixExecrises
-hello!
+This is our client side.
