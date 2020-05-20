@@ -1,10 +1,15 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        index: './src/index.js',
+        promise: './src/promise.js'
+    },
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname)
+        filename: '[name].js',
+        path: path.resolve(__dirname,'dist')
+        // filename: 'bundle.js',
+        // path: path.resolve(__dirname)
     },
     module: {
         rules: [
@@ -18,5 +23,6 @@ module.exports = {
         ]
     },
     mode: 'development',
-    devtool: 'eval-source-map'
+    devtool: 'eval-source-map',
+    
 };

@@ -1,4 +1,5 @@
-﻿const locations = [
+﻿// import $ from 'jquery';
+const locations = [
     {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
@@ -35,9 +36,9 @@
 ];
 let added = false;
 const searchBottun = document.getElementById('search');
+// searchBottun.addEventListener("click", locationsForPatient);
+searchBottun.addEventListener("click", getLocationByPatientId);
 const patientLocations = [];
-searchBottun.addEventListener("click", locationsForPatient);
-
 const helloTitle = document.createElement('h1');
 helloTitle.innerText = 'Epidemiology Report';
 
@@ -125,6 +126,13 @@ function addAddingOption() {
     addPath.addEventListener("click", addNewLocation);
     addPath.value = "Add Location";
     document.getElementById("addLocation").appendChild(addPath);
+
+    const saveLocations = document.createElement("INPUT");
+    saveLocations.setAttribute("type", "button");
+    saveLocations.setAttribute("id", "save");
+    // saveLocations.addEventListener("click", addNewLocation);
+    saveLocations.value = "Save";
+    document.getElementById("addLocation").appendChild(saveLocations);
 }
 function cleanTable() {
     const table = document.getElementById("pathsTable");
@@ -167,3 +175,31 @@ function compareDates(a, b) {
 function sortDates(listToSort) {
     return listToSort.sort(compareDates);
 }
+
+
+// DeleteKartItems();
+//
+function getLocationByPatientId() {
+debugger;
+    const url = "https://localhost:44389/api/locations/111"; // site that doesn’t send Access-Control-*
+    fetch(url)
+        .then(response => response.text())
+        .then(contents => console.log(contents))
+        .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+   ;
+    
+    // $.ajax({
+    //     type: "GET",
+    //     url: 'https://localhost:44389/api/locations/111',
+    //     data: "",
+    //     // contentType: "application/json; charset=utf-8",
+    //     // dataType: "json",
+    //     success: function (msg) {
+    //         alert('success');
+    //     },
+    //     error: function (e) {
+    //         alert('fail');
+    //     }
+    // });
+}
+
