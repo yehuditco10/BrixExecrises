@@ -4,7 +4,9 @@
     "main": "",
     "scripts": {
         "build": "webpack",
-        "start": "webpack-dev-server --open"
+     
+        "start": "webpack-dev-server --open "
+
     },
     "author": "",
     "license": "ISC",

@@ -62,30 +62,7 @@ input {
 h1 {
     color: #5099eff2;
 }
-
-/* Batya Code */
-
-/* h1 { 
-    background-color: red;
-    font-weight: inherit;
-    margin-left: inherit;
-    font-family: monospace;
-    width: 250px;
-    } */
-
-/* li {
-    background-color:mediumaquamarine;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: unset;
-    border: green;
-    border-left: inherit; 
+#saveLocations{
+    margin-top: 3vh;
+    margin-left: 29vw;
 }
-ul{
-    position: relative;
-    max-width: 500px;
-} */
-
-/* div {
-    width: 250px;
-    height: 100px;
-} */

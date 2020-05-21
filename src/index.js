@@ -1,5 +1,5 @@
 ﻿// import $ from 'jquery';
-const locations = [
+let locations = [
     {
         startDate: '2020.05.05 12:00:22',
         endDate: '2020.06.05 12:00:22',
@@ -36,13 +36,14 @@ const locations = [
 ];
 let added = false;
 const searchBottun = document.getElementById('search');
-// searchBottun.addEventListener("click", locationsForPatient);
 searchBottun.addEventListener("click", getLocationByPatientId);
+
 const patientLocations = [];
 const helloTitle = document.createElement('h1');
 helloTitle.innerText = 'Epidemiology Report';
 
 document.getElementById("title").appendChild(helloTitle);
+
 function locationsForPatient() {
     cleanTable();
     patientId = document.getElementById('patientID').value;
@@ -76,7 +77,7 @@ function createPathTable(patientLocations) {
             cell.innerHTML = path[cellName];
         }
         const cancle = row.insertCell(4);
-        cancle.innerHTML = " X ";
+        cancle.innerHTML = "    X ";
         cancle.addEventListener('click', removePath);
     }
 }
@@ -91,12 +92,14 @@ function addNewLocation() {
     locations.push(newPath);
     locationsForPatient();
     cleanAddingOption();
+    document.getElementById("save").value = "save";
 }
 function removePath(path) {
     const rowRemove = path.path[1].id.substr(3, 1);
     const patient = patientLocations[rowRemove];
     locations.splice(locations.indexOf(patient), 1);
     locationsForPatient();
+    document.getElementById("save").value = "save";
 }
 function addAddingOption() {
     added = true;
@@ -130,9 +133,9 @@ function addAddingOption() {
     const saveLocations = document.createElement("INPUT");
     saveLocations.setAttribute("type", "button");
     saveLocations.setAttribute("id", "save");
-    // saveLocations.addEventListener("click", addNewLocation);
+    saveLocations.addEventListener("click", saveChanges);
     saveLocations.value = "Save";
-    document.getElementById("addLocation").appendChild(saveLocations);
+    document.getElementById("saveLocations").appendChild(saveLocations);
 }
 function cleanTable() {
     const table = document.getElementById("pathsTable");
@@ -160,7 +163,7 @@ function initList(listToInit) {
 }
 function filterCity() {
     let selected = this.value;
-    console.log("selected city ", selected);
+    // console.log("selected city ", selected);
     let match = '';
     if (selected !== '' && selected !== 'All') {
         match = locations.filter(element => element.city === selected);
@@ -179,27 +182,49 @@ function sortDates(listToSort) {
 
 // DeleteKartItems();
 //
+
 function getLocationByPatientId() {
-debugger;
-    const url = "https://localhost:44389/api/locations/111"; // site that doesn’t send Access-Control-*
-    fetch(url)
-        .then(response => response.text())
-        .then(contents => console.log(contents))
-        .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
-   ;
-    
-    // $.ajax({
-    //     type: "GET",
-    //     url: 'https://localhost:44389/api/locations/111',
-    //     data: "",
-    //     // contentType: "application/json; charset=utf-8",
-    //     // dataType: "json",
-    //     success: function (msg) {
-    //         alert('success');
-    //     },
-    //     error: function (e) {
-    //         alert('fail');
-    //     }
-    // });
+    var xhr = new XMLHttpRequest();
+    cleanTable(); //204
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            cleanTable();
+            const jLocations = JSON.parse(this.responseText);
+            if (jLocations.length > 0) {
+                patientLocations.splice(0, patientLocations.length);
+                patientLocations.push(...jLocations);
+                createPathTable(patientLocations);
+            }
+
+            if (added === false)
+                addAddingOption();
+        }
+        // if(this.status===204){
+        //     cleanTable();
+        // }
+    };
+    const url = "https://localhost:44389/api/locations/" + document.getElementById('patientID').value;
+    xhr.open("GET", url, true);
+    xhr.send();
 }
+
+function saveChanges() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("save").value = "saved !";
+            const jLocations = JSON.parse(this.responseText);
+            locations = jLocations;
+            console.log(location);
+        }
+
+    };
+    xhttp.open("POST", "https://localhost:44389/api/locations", true);
+    //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhttp.send(JSON.stringify(patientLocations));
+}
+//
+// "start": "webpack-dev-server --open --proxy-config proxy.json"
 
